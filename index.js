@@ -12,7 +12,7 @@ function linkExtraction(text){
             [temp[1]] : [temp[2]]
         })
     }
-    return (resultArray)
+    return resultArray.length === 0 ? "Não há links" : resultArray
 }
 
 
@@ -24,10 +24,12 @@ async function readFile(filePath){
     const encode = "utf-8";
     try {
         const text = await fs.promises.readFile(filePath, encode)
-        console.log(chalk.green(linkExtraction(text)));
+        return (linkExtraction(text));
     } catch (error) {
         errorTreatment(error)
     }
 }
 
 readFile("./arquivos/texto.md")
+
+export default readFile;
